@@ -3,9 +3,9 @@ PORTA = $6001
 DDRB = $6002 ; Data Direction Register B (used for settings pins on PORTB to input/output)
 DDRA = $6003 ; Data Direction Register A
 
-E  = %10000000
-RW = %01000000
-RS = %00100000
+E  = %10000000 ; Enable bit - Setting to 1 starts data read/write
+RW = %01000000 ; Read/Write bit - 1 to read, 0 to write
+RS = %00100000 ; Register Select bit - 1 for data registers, 0 for instruction registers
 
   .org $8000 ; A15 pin (6502) is connected to CE (ROM); ROM only enabled from 8000 -> FFFF  
 
@@ -74,15 +74,15 @@ lcd_instruction:
 print_char:
   jsr lcd_wait
   sta PORTB
-  lda #RS
+  lda #RS        ; Set RS bit to Data Register (for R/W)
   sta PORTA
-  lda #(RS | E)
+  lda #(RS | E)  
   sta PORTA
   lda #RS
   sta PORTA
   rts
 
-  .org $fffc
-  .word reset
-  .word $0000                                                             
+  .org $fffc     ; microprocessor reads first instruction from this address
+  .word reset    
+  .word $0000    ; padding                                                         
 
