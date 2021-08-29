@@ -74,7 +74,7 @@ lcd_instruction:
 print_char:
   jsr lcd_wait
   sta PORTB
-  lda #RS        ; Set RS bit to Data Register (for R/W)
+  lda #RS        ; Set RS bit to Data Registers (for R/W)
   sta PORTA
   lda #(RS | E)  
   sta PORTA
@@ -82,7 +82,7 @@ print_char:
   sta PORTA
   rts
 
-  .org $fffc     ; microprocessor reads first instruction from this address
+  .org $fffc     ; program counter is loaded with the value stored at this address
   .word reset    
   .word $0000    ; padding                                                         
 
