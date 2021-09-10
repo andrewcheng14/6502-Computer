@@ -13,7 +13,7 @@ Here is a annotated version of the final build, showing how I set up the address
 Address | Description
 --- | ---
 0x0000-0x3FFF | SRAM (0100-01FF Call Stack)
-0x0400-0x5FFF | Unused
+0x0400-0x5FFF | Reserved
 0x6000-0x6003 | I/O (VIA)
 0x6004-0x7FFF | Reserved
 0x8000-0xFFFF | ROM
